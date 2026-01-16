@@ -308,7 +308,7 @@ def train(
         logging_steps=TRAINING_CONFIG["logging_steps"],
         save_strategy=TRAINING_CONFIG["save_strategy"],
         save_steps=100 if test_run else TRAINING_CONFIG["save_steps"],
-        evaluation_strategy=TRAINING_CONFIG["eval_strategy"],
+        eval_strategy=TRAINING_CONFIG["eval_strategy"],
         eval_steps=50 if test_run else TRAINING_CONFIG["eval_steps"],
         save_total_limit=TRAINING_CONFIG["save_total_limit"],
         report_to=TRAINING_CONFIG["report_to"],
