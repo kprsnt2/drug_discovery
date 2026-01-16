@@ -1,0 +1,10 @@
+{
+  "instructions": {
+    "train": 4730,
+    "val": 591,
+    "test": 592
+  },
+  "classification": {
+    "all": 110
+  }
+}

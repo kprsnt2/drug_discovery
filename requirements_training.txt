@@ -1,0 +1,36 @@
+# Training Requirements for AMD MI300X
+
+# Core ML
+torch>=2.2.0
+transformers>=4.40.0
+datasets>=2.18.0
+accelerate>=0.27.0
+peft>=0.10.0
+trl>=0.8.0
+
+# For AMD ROCm
+# torch (install via: pip install torch --index-url https://download.pytorch.org/whl/rocm6.0)
+
+# Flash Attention (AMD version)
+# pip install flash-attn --no-build-isolation (for AMD ROCm)
+
+# Utilities
+tensorboard>=2.15.0
+wandb>=0.16.0
+safetensors>=0.4.0
+sentencepiece>=0.2.0
+protobuf>=4.25.0
+packaging>=24.0
+
+# Evaluation
+evaluate>=0.4.0
+scikit-learn>=1.4.0
+rouge-score>=0.1.2
+
+# HTTP & Progress
+requests>=2.31.0
+tqdm>=4.66.0
+rich>=13.7.0
+
+# Chemistry (for structure analysis)
+rdkit>=2023.9.1
