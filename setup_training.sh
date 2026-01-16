@@ -22,9 +22,16 @@ echo ""
 echo "[1/6] Checking GPU..."
 rocm-smi || { echo "ROCm not found. Is this an AMD GPU instance?"; exit 1; }
 
-# === Step 3: Create Virtual Environment ===
+# === Step 3: Install python3-venv if needed ===
 echo ""
-echo "[2/6] Creating virtual environment..."
+echo "[2/6] Installing python3-venv (if needed)..."
+apt-get update -qq
+apt-get install -y python3-venv python3-full > /dev/null 2>&1 || true
+echo "  ✓ python3-venv available"
+
+# === Step 4: Create Virtual Environment ===
+echo ""
+echo "[3/6] Creating virtual environment..."
 VENV_DIR="venv"
 
 if [ ! -d "$VENV_DIR" ]; then
