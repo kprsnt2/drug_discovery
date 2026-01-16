@@ -19,24 +19,45 @@ export HIP_VISIBLE_DEVICES=0
 
 # === Step 2: Check ROCm and GPU ===
 echo ""
-echo "[1/5] Checking GPU..."
+echo "[1/6] Checking GPU..."
 rocm-smi || { echo "ROCm not found. Is this an AMD GPU instance?"; exit 1; }
 
-# === Step 3: Install Dependencies ===
+# === Step 3: Create Virtual Environment ===
 echo ""
-echo "[2/5] Installing dependencies..."
+echo "[2/6] Creating virtual environment..."
+VENV_DIR="venv"
 
-# Install PyTorch for ROCm (if not installed)
+if [ ! -d "$VENV_DIR" ]; then
+    python3 -m venv $VENV_DIR
+    echo "  ✓ Virtual environment created"
+else
+    echo "  ✓ Virtual environment already exists"
+fi
+
+# Activate virtual environment
+source $VENV_DIR/bin/activate
+echo "  ✓ Virtual environment activated"
+
+# === Step 4: Install Dependencies ===
+echo ""
+echo "[3/6] Installing dependencies..."
+
+# Upgrade pip
 pip install --upgrade pip
+
+# Install PyTorch for ROCm
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
 
 # Install training dependencies
 pip install transformers>=4.40.0 datasets accelerate peft trl
 pip install tensorboard safetensors sentencepiece rich
 
-# === Step 4: Download the model (optional pre-cache) ===
+# Install evaluation dependencies
+pip install evaluate scikit-learn rouge-score
+
+# === Step 5: Download the model (optional pre-cache) ===
 echo ""
-echo "[3/5] Pre-downloading model (optional)..."
+echo "[4/6] Pre-downloading model (optional)..."
 python -c "
 from transformers import AutoTokenizer
 try:
@@ -46,9 +67,9 @@ except Exception as e:
     print(f'⚠ Could not pre-cache model: {e}')
 "
 
-# === Step 5: Verify setup ===
+# === Step 6: Verify setup ===
 echo ""
-echo "[4/5] Verifying PyTorch + ROCm..."
+echo "[5/6] Verifying PyTorch + ROCm..."
 python -c "
 import torch
 print(f'PyTorch version: {torch.__version__}')
@@ -59,13 +80,16 @@ if torch.cuda.is_available():
     print(f'VRAM: {mem:.1f} GB')
 "
 
-# === Step 6: Run Training ===
+# === Step 7: Instructions ===
 echo ""
-echo "[5/5] Starting training..."
+echo "[6/6] Setup complete!"
 echo ""
 echo "=============================================="
 echo "  TRAINING COMMANDS"
 echo "=============================================="
+echo ""
+echo "IMPORTANT: Always activate the virtual environment first:"
+echo "  source venv/bin/activate"
 echo ""
 echo "Quick test (100 samples, 1 epoch):"
 echo "  python train_model.py --test_run"
