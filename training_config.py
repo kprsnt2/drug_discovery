@@ -20,7 +20,7 @@ from pathlib import Path
 # ============================================================================
 MODEL_CONFIG = {
     # GPT-OSS-20B - OpenAI's open-source 20B model
-    "model_name": "openai-community/gpt-oss-20b",
+    "model_name": "openai/gpt-oss-20b",
     "model_type": "causal_lm",
     "torch_dtype": "bfloat16",
     "max_length": 2048,

@@ -68,7 +68,7 @@ echo "[4/6] Pre-downloading model (optional)..."
 python -c "
 from transformers import AutoTokenizer
 try:
-    AutoTokenizer.from_pretrained('openai-community/gpt-oss-20b', trust_remote_code=True)
+    AutoTokenizer.from_pretrained('openai/gpt-oss-20b', trust_remote_code=True)
     print('✓ Model tokenizer cached')
 except Exception as e:
     print(f'⚠ Could not pre-cache model: {e}')
