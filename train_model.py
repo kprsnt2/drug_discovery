@@ -194,7 +194,7 @@ def load_model_and_tokenizer(model_name: str, use_lora: bool = False):
         torch_dtype=torch.bfloat16,
         device_map="auto",
         trust_remote_code=MODEL_CONFIG.get("trust_remote_code", True),
-        attn_implementation="sdpa" if torch.cuda.is_available() else "eager",
+        attn_implementation="eager",  # GPT-OSS doesn't support flash_attn or sdpa yet
     )
     
     # Enable gradient checkpointing
