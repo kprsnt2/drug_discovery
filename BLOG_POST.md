@@ -148,6 +148,16 @@ The training ran for **5 hours 38 minutes** on AMD MI300X:
 - Total Steps: 888
 - Samples/Second: 0.698
 
+### TensorBoard Training Curves
+
+![TensorBoard training charts showing loss, gradient norm, and learning rate](docs/tensorboard_charts.png)
+
+The charts show:
+- **train/loss**: Smooth decrease from 0.85 → 0.19 ✅
+- **train/grad_norm**: Stabilized around 4-5 after initial spike ✅
+- **train/learning_rate**: Perfect cosine decay schedule ✅
+- **train/epoch**: Clean linear progression through 3 epochs ✅
+
 ## 🧪 Evaluation Results
 
 Here's where it gets interesting. I ran a keyword-based benchmark comparing base vs fine-tuned:
