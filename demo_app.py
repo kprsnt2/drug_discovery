@@ -86,7 +86,7 @@ def load_model(model_path: str):
 def generate_response(
     instruction: str,
     input_text: str,
-    max_tokens: int = 256,
+    max_tokens: int = 512,
     temperature: float = 0.7,
     top_p: float = 0.9,
 ) -> str:
@@ -105,7 +105,7 @@ def generate_response(
 ### Response:
 """
     
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=2048)
     inputs = {k: v.to(model.device) for k, v in inputs.items()}
     
     with torch.no_grad():
@@ -115,17 +115,19 @@ def generate_response(
             do_sample=True,
             temperature=temperature,
             top_p=top_p,
+            repetition_penalty=1.1,  # Prevent repetitive outputs
             pad_token_id=tokenizer.pad_token_id,
             eos_token_id=tokenizer.eos_token_id,
         )
     
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    # Decode only the new tokens (not the prompt)
+    response = tokenizer.decode(
+        outputs[0][inputs["input_ids"].shape[1]:],
+        skip_special_tokens=True
+    )
     
-    # Extract just the response part
-    if "### Response:" in response:
-        response = response.split("### Response:")[-1].strip()
-    
-    return response
+    return response.strip()
+
 
 
 def create_demo():
