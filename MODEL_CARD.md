@@ -93,6 +93,30 @@ Training showed excellent convergence:
 
 ## Evaluation Results
 
+### Overall Metrics
+
+| Metric | Value |
+|--------|-------|
+| Average Prediction Length | 135.02 tokens |
+| Average Reference Length | 20.25 tokens |
+| Total Test Samples | 592 |
+
+### Task-Specific Accuracy
+
+| Task | Accuracy | Samples |
+|------|----------|---------|
+| Status Analysis | **99.12%** | 455 |
+| Structure Analysis | **93.49%** | 33 |
+| Structure Identification | **80.08%** | 24 |
+| Failure Analysis | 40.40% | 34 |
+| Adverse Events | 29.79% | 46 |
+
+> **Note**: The model achieves exceptional performance on status analysis (99.12%) and structure-related tasks (93.49% and 80.08%), demonstrating strong domain understanding. Lower scores on adverse events and failure analysis reflect the complexity of these open-ended generation tasks.
+
+📊 **Full results available in** [`evaluation_results.json`](evaluation_results.json)
+
+---
+
 ### The Key Difference: Drug Discovery Capability
 
 **Query**: "Can you give me a new molecule better than paracetamol?"
@@ -114,14 +138,14 @@ It seems you're looking for a new molecule with potential medicinal properties..
 4. **Regulatory Status**: This combination is not an FDA-approved drug...
 ```
 
-### Benchmark Results
+### Comparative Benchmark Results
 
 | Metric | Base GPT-OSS-20B | Fine-tuned | 
 |--------|------------------|------------|
 | Keyword Relevance | 67.5% | 52.5% |
 | Response Time | 11.73s | 10.95s (-6.6%) |
 
-**Per-Task Performance**:
+**Per-Task Performance (Comparative)**:
 | Task | Base | Fine-tuned | Winner |
 |------|------|------------|--------|
 | Drug Info | 80% | **100%** | 🏆 Fine-tuned |

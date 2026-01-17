@@ -1,0 +1,45 @@
+{
+  "overall_metrics": {
+    "avg_pred_length": 135.0236,
+    "avg_ref_length": 20.2466
+  },
+  "results_by_task": [
+    {
+      "task": "status_analysis",
+      "accuracy": 99.12,
+      "bleu": null,
+      "rouge_l": null,
+      "samples": 455
+    },
+    {
+      "task": "adverse_events",
+      "accuracy": 29.79,
+      "bleu": null,
+      "rouge_l": null,
+      "samples": 46
+    },
+    {
+      "task": "failure_analysis",
+      "accuracy": 40.40,
+      "bleu": null,
+      "rouge_l": null,
+      "samples": 34
+    },
+    {
+      "task": "structure_analysis",
+      "accuracy": 93.49,
+      "bleu": null,
+      "rouge_l": null,
+      "samples": 33
+    },
+    {
+      "task": "structure_identification",
+      "accuracy": 80.08,
+      "bleu": null,
+      "rouge_l": null,
+      "samples": 24
+    }
+  ],
+  "total_samples": 592,
+  "evaluation_date": "2025-01-17"
+}
