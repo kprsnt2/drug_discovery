@@ -32,8 +32,9 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 
 console = Console()
 
-# Test prompts for comparison
+# Test prompts for comparison - Comprehensive drug discovery evaluation
 COMPARISON_PROMPTS = [
+    # Basic Drug Information
     {
         "task": "drug_info",
         "instruction": "What is the mechanism of action of Metformin?",
@@ -41,11 +42,27 @@ COMPARISON_PROMPTS = [
         "expected_keywords": ["diabetes", "glucose", "insulin", "liver", "blood sugar"]
     },
     {
+        "task": "drug_info",
+        "instruction": "Describe the therapeutic class of Atorvastatin.",
+        "input": "Drug: Atorvastatin",
+        "expected_keywords": ["statin", "cholesterol", "HMG-CoA", "lipid", "cardiovascular"]
+    },
+    
+    # Adverse Events
+    {
         "task": "adverse_events",
         "instruction": "What are the common side effects of Ibuprofen?",
         "input": "Drug: Ibuprofen",
         "expected_keywords": ["stomach", "gastrointestinal", "bleeding", "nausea", "ulcer"]
     },
+    {
+        "task": "adverse_events",
+        "instruction": "What serious adverse reactions are associated with Fluoroquinolones?",
+        "input": "Drug class: Fluoroquinolones (Ciprofloxacin, Levofloxacin)",
+        "expected_keywords": ["tendon", "rupture", "neuropathy", "QT", "CNS"]
+    },
+    
+    # Structure Analysis (SMILES)
     {
         "task": "structure_analysis",
         "instruction": "What is the SMILES notation for Aspirin?",
@@ -53,11 +70,33 @@ COMPARISON_PROMPTS = [
         "expected_keywords": ["CC(=O)", "c1ccccc1", "SMILES", "O=C"]
     },
     {
+        "task": "structure_analysis",
+        "instruction": "Describe the molecular structure of Caffeine.",
+        "input": "Drug: Caffeine",
+        "expected_keywords": ["purine", "methyl", "xanthine", "nitrogen", "ring"]
+    },
+    {
+        "task": "structure_analysis",
+        "instruction": "What functional groups are present in Acetaminophen?",
+        "input": "Drug: Acetaminophen (Paracetamol)",
+        "expected_keywords": ["hydroxyl", "amide", "benzene", "phenol", "acetyl"]
+    },
+    
+    # Drug Interactions
+    {
         "task": "drug_interaction",
         "instruction": "Can Warfarin be taken with Aspirin?",
         "input": "Drug combination: Warfarin + Aspirin",
         "expected_keywords": ["bleeding", "risk", "interaction", "caution", "anticoagulant"]
     },
+    {
+        "task": "drug_interaction",
+        "instruction": "What happens when MAO inhibitors are combined with SSRIs?",
+        "input": "Drug combination: MAOIs + SSRIs",
+        "expected_keywords": ["serotonin", "syndrome", "dangerous", "contraindicated", "hypertensive"]
+    },
+    
+    # Indications
     {
         "task": "indication",
         "instruction": "What conditions is Lisinopril used to treat?",
@@ -65,22 +104,78 @@ COMPARISON_PROMPTS = [
         "expected_keywords": ["hypertension", "blood pressure", "heart", "ACE", "cardiovascular"]
     },
     {
+        "task": "indication",
+        "instruction": "What are the approved uses of Gabapentin?",
+        "input": "Drug: Gabapentin",
+        "expected_keywords": ["seizure", "epilepsy", "neuropathic", "pain", "neuralgia"]
+    },
+    
+    # Pharmacology
+    {
         "task": "pharmacology",
         "instruction": "Explain the pharmacokinetics of Omeprazole.",
         "input": "Drug: Omeprazole",
         "expected_keywords": ["proton pump", "acid", "absorption", "metabolism", "half-life"]
     },
     {
+        "task": "pharmacology",
+        "instruction": "How is Morphine metabolized in the body?",
+        "input": "Drug: Morphine",
+        "expected_keywords": ["glucuronidation", "liver", "metabolite", "M3G", "M6G"]
+    },
+    
+    # Dosage
+    {
         "task": "dosage",
         "instruction": "What is the typical dosage for Amoxicillin in adults?",
         "input": "Drug: Amoxicillin",
         "expected_keywords": ["mg", "daily", "oral", "infection", "antibiotic"]
     },
+    
+    # Contraindications
     {
         "task": "contraindication",
         "instruction": "Who should not take Penicillin?",
         "input": "Drug: Penicillin",
         "expected_keywords": ["allergy", "hypersensitivity", "allergic", "reaction"]
+    },
+    {
+        "task": "contraindication",
+        "instruction": "What are the contraindications for Methotrexate?",
+        "input": "Drug: Methotrexate",
+        "expected_keywords": ["pregnancy", "liver", "kidney", "immunocompromised", "bone marrow"]
+    },
+    
+    # FDA Status
+    {
+        "task": "status_analysis",
+        "instruction": "What is the FDA approval status of Pembrolizumab?",
+        "input": "Drug: Pembrolizumab (Keytruda)",
+        "expected_keywords": ["approved", "FDA", "cancer", "immunotherapy", "PD-1"]
+    },
+    
+    # Clinical Trials
+    {
+        "task": "clinical_trials",
+        "instruction": "What phase of clinical trials is typically required for FDA approval?",
+        "input": "Topic: Clinical trial phases",
+        "expected_keywords": ["phase", "safety", "efficacy", "Phase 3", "Phase III"]
+    },
+    
+    # Molecular Properties
+    {
+        "task": "molecular_properties",
+        "instruction": "What is the molecular weight significance in drug development?",
+        "input": "Topic: Lipinski's Rule of Five",
+        "expected_keywords": ["500", "dalton", "oral", "bioavailability", "absorption"]
+    },
+    
+    # Drug Classification
+    {
+        "task": "classification",
+        "instruction": "How are beta-blockers classified?",
+        "input": "Drug class: Beta-blockers",
+        "expected_keywords": ["selective", "non-selective", "cardioselective", "beta-1", "adrenergic"]
     },
 ]
 
