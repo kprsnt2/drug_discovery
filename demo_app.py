@@ -236,7 +236,6 @@ def create_demo():
                 output = gr.Textbox(
                     label="Generated Response",
                     lines=15,
-                    show_copy_button=True,
                 )
                 
                 gr.Markdown("""
